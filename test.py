@@ -1,6 +1,6 @@
 import os
 def get_all_filepath(folder):
-    # 获取指定路径下的所有.ass文件
+    # 获取指定路径下的所有.xmind文件
     file_path = []
     for fpathe, dirs, fs in os.walk(folder):
         for f in fs:
