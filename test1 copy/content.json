@@ -1,0 +1,248 @@
+{
+    "id": "eb8be8049dca3c8cb12e88aa58",
+    "class": "sheet",
+    "title": "画布 1",
+    "rootTopic": {
+        "id": "b9aa22deba98b3b20c7ac8aca2",
+        "class": "topic",
+        "title": "总账-凭证列表",
+        "structureClass": "org.xmind.ui.map.unbalanced",
+        "children": {
+            "attached": [
+                {
+                    "id": "b58888b5ceebbf0e68dada0656",
+                    "title": "新增凭证",
+                    "children": {
+                        "attached": [
+                            {
+                                "title": "无需数据准备",
+                                "id": "565fdcf3-67da-4ba6-978a-437ee2508973",
+                                "children": {
+                                    "attached": [
+                                        {
+                                            "title": "录入1",
+                                            "id": "5bbf7311-79b4-41c1-bd02-84b5bf1200c0",
+                                            "children": {
+                                                "attached": [
+                                                    {
+                                                        "title": "结果1",
+                                                        "id": "0df5f2df-6a88-4013-9c63-da2f47a04779"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "title": "录入2",
+                                            "id": "af27f1e2-1f69-4832-8e26-439c78da5009",
+                                            "children": {
+                                                "attached": [
+                                                    {
+                                                        "title": "结果2",
+                                                        "id": "c15fc330-0381-45e1-a402-25804d0c0697"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "title": "录入3",
+                                            "id": "a61491d5-7622-437e-b1a9-b7f1f78e2b71",
+                                            "children": {
+                                                "attached": [
+                                                    {
+                                                        "title": "结果3",
+                                                        "id": "e3cf46c6-2798-4fcd-8d3b-58b3224b92bc"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "193b56735e689ae86a01d91513",
+                    "title": "删除凭证",
+                    "children": {
+                        "attached": [
+                            {
+                                "title": "凭证001、凭证002",
+                                "id": "56ddc7db-94ea-440d-b30d-3be58092d797",
+                                "children": {
+                                    "attached": [
+                                        {
+                                            "title": "删除",
+                                            "id": "1132b871-fc9c-452a-9d4a-f8149bb93909"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "67ddbcb1-85c9-4478-a0aa-580e9fdcd971",
+                    "title": "分支主题 3",
+                    "titleUnedited": true
+                }
+            ]
+        },
+        "extensions": [
+            {
+                "content": [
+                    {
+                        "content": "3",
+                        "name": "right-number"
+                    }
+                ],
+                "provider": "org.xmind.ui.map.unbalanced"
+            }
+        ]
+    },
+    "theme": {
+        "id": "c669ec6d4d48895260d968fc99",
+        "importantTopic": {
+            "type": "topic",
+            "properties": {
+                "fo:font-weight": "bold",
+                "fo:color": "#2b2b2b",
+                "svg:fill": "#FFDC34"
+            }
+        },
+        "minorTopic": {
+            "type": "topic",
+            "properties": {
+                "fo:font-weight": "bold",
+                "fo:color": "#2b2b2b",
+                "svg:fill": "#AB9738"
+            }
+        },
+        "expiredTopic": {
+            "type": "topic",
+            "properties": {
+                "fo:font-style": "italic",
+                "fo:text-decoration": " line-through"
+            }
+        },
+        "centralTopic": {
+            "type": "topic",
+            "styleId": "9a13b7d6-cd05-44c3-b903-6c3a50edc46e",
+            "properties": {
+                "shape-class": "org.xmind.topicShape.roundedRect",
+                "svg:fill": "#1B1B1D",
+                "fo:font-family": "Montserrat",
+                "fo:font-weight": "600",
+                "fo:font-style": "normal",
+                "line-width": "3",
+                "line-color": "#292929",
+                "border-line-width": "0"
+            }
+        },
+        "map": {
+            "type": "map",
+            "styleId": "f0e1f9bb-a8f5-486a-a70a-b72b2b6560d3",
+            "properties": {
+                "svg:fill": "#000000"
+            }
+        },
+        "subTopic": {
+            "type": "topic",
+            "styleId": "9ea90eed-1da0-4c93-bac4-2085e16a0faf",
+            "properties": {
+                "fo:font-family": "Montserrat",
+                "svg:fill": "#636366",
+                "shape-class": "org.xmind.topicShape.roundedRect",
+                "fo:font-size": "14pt",
+                "fo:text-align": "left",
+                "border-line-width": "0",
+                "fo:color": "#FFFFFF"
+            }
+        },
+        "mainTopic": {
+            "type": "topic",
+            "styleId": "42065f7f-018c-4eb9-9dc7-3a7bbf464915",
+            "properties": {
+                "fo:font-family": "Montserrat",
+                "svg:fill": "#3A3A3C",
+                "border-line-width": "0",
+                "fo:font-weight": "600",
+                "fo:font-style": "normal",
+                "fo:font-size": "18pt",
+                "fo:text-align": "left",
+                "fo:color": "#FFFFFF",
+                "line-width": "2"
+            }
+        },
+        "summaryTopic": {
+            "type": "topic",
+            "styleId": "c8f4c32b-2607-4fae-bb85-b8736039e941",
+            "properties": {
+                "fo:font-family": "Montserrat",
+                "svg:fill": "#8E8E93",
+                "fo:font-weight": "500",
+                "fo:font-style": "normal",
+                "line-color": "#292929",
+                "border-line-width": "0"
+            }
+        },
+        "calloutTopic": {
+            "type": "topic",
+            "styleId": "6f8bd667-fb82-4d0d-899f-05dc76c5945e",
+            "properties": {
+                "fo:font-family": "Montserrat",
+                "svg:fill": "#8E8E93",
+                "fo:font-size": "14pt",
+                "fo:font-weight": "500",
+                "fo:font-style": "normal"
+            }
+        },
+        "floatingTopic": {
+            "type": "topic",
+            "styleId": "c9509bc2-2641-4f5f-8b38-e62c14c907f9",
+            "properties": {
+                "fo:font-family": "Montserrat",
+                "border-line-width": "0",
+                "fo:font-weight": "500",
+                "fo:font-style": "normal",
+                "line-width": "2",
+                "line-color": "#292929"
+            }
+        },
+        "boundary": {
+            "type": "boundary",
+            "styleId": "0d7cf959-3b54-4849-88e1-cc0fc8c60341",
+            "properties": {
+                "svg:fill": "#545455",
+                "shape-class": "org.xmind.boundaryShape.roundedRect",
+                "line-color": "#5D5D60",
+                "fo:font-weight": "500",
+                "fo:font-style": "normal",
+                "fo:color": "#FFFFFF",
+                "fo:font-size": "13pt",
+                "fo:font-family": "Montserrat"
+            }
+        },
+        "relationship": {
+            "type": "relationship",
+            "styleId": "57da2f8e-3f8d-47ee-a802-93023fc802c1",
+            "properties": {
+                "line-color": "#8E8E93",
+                "line-width": "2",
+                "fo:font-weight": "500",
+                "fo:font-style": "normal",
+                "fo:font-family": "Montserrat",
+                "fo:color": "#FFFFFF",
+                "fo:font-size": "13pt"
+            }
+        },
+        "summary": {
+            "type": "summary",
+            "styleId": "ddeb9d94-1678-4129-8796-42b036e08dd2",
+            "properties": {
+                "line-color": "#5A5A5A"
+            }
+        }
+    },
+    "topicPositioning": "fixed"
+}
