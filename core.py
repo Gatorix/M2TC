@@ -1,5 +1,5 @@
 import util
-
+import json
 
 filename = util.get_all_filepath('./')
 
@@ -16,5 +16,4 @@ def get_xmind_json(filename):
     return json
 
 
-print(get_xmind_json(filename[0]))
-
+print(json.loads(get_xmind_json(filename[1])))

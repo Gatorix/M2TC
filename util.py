@@ -3,8 +3,15 @@ import sys
 import zipfile
 
 
-def press_any_key_exit(msg):
-    
+def exit_with_anykey_win():
+    import msvcrt
+    print("按任意键退出...")
+    ord(msvcrt.getch())
+    os._exit(1)
+
+
+def exit_with_anykey_mac(msg):
+
     import termios
     # 获取标准输入的描述符
     fd = sys.stdin.fileno()
@@ -31,11 +38,13 @@ def press_any_key_exit(msg):
     # 还原终端设置
     termios.tcsetattr(fd, termios.TCSANOW, old_ttyinfo)
 
-# if __name__ == "__main__":
-#   press_any_key_exit("按任意键继续...")
-#   press_any_key_exit("按任意键退出...")
 
-
+def exit_with_anykey():
+    if sys.platform == 'win32':
+        exit_with_anykey_win()
+    else:
+        exit_with_anykey_mac("按任意键退出...")
+        sys.exit(0)
 
 
 def load_xmind_file(filename):
@@ -48,7 +57,7 @@ def load_xmind_file(filename):
 
 
 def get_all_filepath(folder):
-    # 获取指定路径下的所有.ass文件
+    # 获取指定路径下的所有.xmind文件
     file_path = []
     for fpathe, dirs, fs in os.walk(folder):
         for f in fs:
@@ -59,15 +68,3 @@ def get_all_filepath(folder):
             else:
                 file_path.append(os.path.join(fpathe, f))
     return file_path
-
-
-def exit_with_anykey():
-    if sys.platform == 'win32':
-        import msvcrt
-        print("按任意键退出...")
-        ord(msvcrt.getch())
-        os._exit(1)
-    else:
-        press_any_key_exit("按任意键退出...")
-        sys.exit(0)
-
