@@ -1,10 +1,11 @@
 import os
 import sys
-import termios
 import zipfile
 
 
 def press_any_key_exit(msg):
+    
+    import termios
     # 获取标准输入的描述符
     fd = sys.stdin.fileno()
 
@@ -35,8 +36,6 @@ def press_any_key_exit(msg):
 #   press_any_key_exit("按任意键退出...")
 
 
-def get_platform():
-    return sys.platform
 
 
 def load_xmind_file(filename):
@@ -63,7 +62,7 @@ def get_all_filepath(folder):
 
 
 def exit_with_anykey():
-    if get_platform() == 'Windows':
+    if sys.platform == 'win32':
         import msvcrt
         print("按任意键退出...")
         ord(msvcrt.getch())
@@ -71,3 +70,4 @@ def exit_with_anykey():
     else:
         press_any_key_exit("按任意键退出...")
         sys.exit(0)
+
