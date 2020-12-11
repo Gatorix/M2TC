@@ -1,15 +1,13 @@
-import os
-def get_all_filepath(folder):
-    # 获取指定路径下的所有.xmind文件
-    file_path = []
-    for fpathe, dirs, fs in os.walk(folder):
-        for f in fs:
-            if '.DS_Store' in os.path.join(fpathe, f):
-                pass
-            elif os.path.join(fpathe, f)[-6:] != '.xmind':
-                pass
+dt = 
+def collect(dt, ls=[]):
+    for k in dt:
+        if k == 'collect':
+            ls.append(dt[k])
+        elif k == 'next':
+            if isinstance(dt[k], dict):
+                return collect(dt[k], ls)
             else:
-                file_path.append(os.path.join(fpathe, f))
-    return file_path
+                return ls
 
-print(get_all_filepath('/Users/caosheng/Documents/M2TC'))
+
+print(collect(dt))
