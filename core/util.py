@@ -1,6 +1,5 @@
 import os
 import sys
-import zipfile
 
 
 def exit_with_anykey_win():
@@ -47,13 +46,13 @@ def exit_with_anykey():
         sys.exit(0)
 
 
-def load_xmind_file(filename):
-    try:
-        xm = zipfile.ZipFile(filename)
-    except zipfile.BadZipFile as e:
-        print('无法解析文件: '+filename)
-        exit_with_anykey()
-    return xm
+# def load_xmind_file(filename):
+#     try:
+#         xm = zipfile.ZipFile(filename)
+#     except zipfile.BadZipFile as e:
+#         print('无法解析文件: '+filename)
+#         exit_with_anykey()
+#     return xm
 
 
 def get_all_filepath(folder):
