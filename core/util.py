@@ -4,7 +4,7 @@ import sys
 
 def exit_with_anykey_win():
     import msvcrt
-    print("按任意键退出...")
+    print(">>> Press any key to exit...")
     ord(msvcrt.getch())
     os._exit(1)
 
@@ -42,7 +42,7 @@ def exit_with_anykey():
     if sys.platform == 'win32':
         exit_with_anykey_win()
     else:
-        exit_with_anykey_mac("按任意键退出...")
+        exit_with_anykey_mac(">>> Press any key to exit...")
         sys.exit(0)
 
 
@@ -58,12 +58,15 @@ def exit_with_anykey():
 def get_all_filepath(folder):
     # 获取指定路径下的所有.xmind文件
     file_path = []
-    for fpathe, dirs, fs in os.walk(folder):
-        for f in fs:
-            if '.DS_Store' in os.path.join(fpathe, f):
-                pass
-            elif os.path.join(fpathe, f)[-6:] != '.xmind':
-                pass
-            else:
-                file_path.append(os.path.join(fpathe, f))
+    try:
+        for fpathe, dirs, fs in os.walk(folder):
+            for f in fs:
+                if '.DS_Store' in os.path.join(fpathe, f):
+                    pass
+                elif os.path.join(fpathe, f)[-6:] != '.xmind':
+                    pass
+                else:
+                    file_path.append(os.path.join(fpathe, f))
+    except TypeError as e:
+        print('路径输入错误，检查后重新输入！')
     return file_path

@@ -1,16 +1,22 @@
+import getpass
+
+
 def merge_description(li, str=''):
     for i in range(len(li)):
         str = str+'_'+li[i]
     return str[1:]
 
 
-def final_li(all_result_list, tc_list, tc_full_list, splitstr):
+def final_li(all_result_list, splitstr, tc_list=[], tc_full_list=[]):
     for item in all_result_list:
         tc_list.append(item[1:])
 
     #  TODO 需要对节点数进行判断，除前两级节点外，每条路线应至少包含三个节点，丢弃不符合条件的路线
 
     for i in tc_list:
+        if len(i.split(splitstr)) < 5:
+            print('>>> Dump %s: Route too short' % (i.split(splitstr)))
+            break
         tmpli = []
         # 功能路径
         tc_funcpath = i.split(splitstr)[:1]
@@ -29,7 +35,7 @@ def final_li(all_result_list, tc_list, tc_full_list, splitstr):
         # 用例级别
         tc_level = '0级'
         # 用例责任人
-        tc_tester = ''
+        tc_tester = getpass.getuser()
 
         tmpli.append(tc_funcpath[0])
         tmpli.append(tc_point[0])

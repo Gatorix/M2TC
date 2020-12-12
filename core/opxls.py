@@ -39,9 +39,15 @@ def write_tc_template(sheet, tcname):
     sheet.row(0).set_style(xlwt.easyxf('font:height 480'))
 
 
-# workbook = xlwt.Workbook()
-# worksheet = workbook.add_sheet('测试用例')
+def create_sheet():
+    workbook = xlwt.Workbook()
+    worksheet = workbook.add_sheet('testcase')
+    return workbook, worksheet
 
 # write_tc_template(worksheet, 'test')
 
-# workbook.save('./t.xls')
+
+def save_workbook(workbook, savepath):
+    workbook.save(savepath)
+
+
