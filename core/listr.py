@@ -13,7 +13,9 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
 
     for i in tc_list:
         if len(i.split(splitstr)) < 5:
-            print('>>> Dump %s: \n      Route too short' % (i.split(splitstr)))
+            print('>>> Dump: %s\n      Reason: Route too short' % (i))
+        elif '#' in i:
+            print('>>> Dump: %s\n      Reason: Manually Abandoned' % (i))
         else:
             tmpli = []
             # 功能路径
@@ -25,6 +27,11 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
             # 来源
             tc_source = '需求文档'
             # 前置条件
+            try:
+                tc_preconditions = i.split(splitstr)[-3]
+            except IndexError as e:
+                print(e)
+
             tc_preconditions = i.split(splitstr)[-3]
             # input
             tc_input = i.split(splitstr)[-2]
@@ -34,6 +41,8 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
             tc_level = '0级'
             # 用例责任人
             tc_tester = getpass.getuser()
+            # 适用版本
+            tc_version = 'v3.0'
 
             tmpli.append(tc_funcpath[0])
             tmpli.append(tc_point[0])
@@ -44,6 +53,7 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
             tmpli.append(tc_output)
             tmpli.append(tc_level)
             tmpli.append(tc_tester)
+            tmpli.append(tc_level)
 
             tc_full_list.append(tmpli)
 

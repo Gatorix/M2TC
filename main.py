@@ -13,7 +13,7 @@ if __name__ == '__main__':
     print("  | |\  /| |   .'____.'    | |    | |        ")
     print(" _| |_\/_| |_ / /_____    _| |_   \ `.___.'\ ")
     print("|_____||_____||_______|  |_____|   `.____ .' ")
-    print("===============ver 0.0.1(beta)===============\n")
+    print("===============ver 0.0.3(beta)===============\n")
 
     while True:
         xmpath = input('>>> Enter .xmind file path: ')
@@ -44,8 +44,10 @@ if __name__ == '__main__':
         print('>>> Creating workbook...')
         workbook, worksheet = create_sheet()
         print('>>> Writing template...')
-        write_tc_template(worksheet, final_list[0][0])
+        write_tc_template(worksheet, '%s '%(final_list[0][0]))
         print('>>> Writing test case to workbook...')
+
+        
 
         print('>>> Saving...')
         save_workbook(workbook, '%s.xls' % (xmfile[:-6]))
