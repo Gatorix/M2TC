@@ -1,6 +1,5 @@
 import time
-import re
-from core.listr import final_li
+from core.listr import *
 from core.parsing import *
 from core.opxls import *
 from core.util import *
@@ -32,11 +31,16 @@ if __name__ == '__main__':
         json_result = get_xm_content_json(file_path)
         xm_root_topic = json_to_dict(json_result)
         all_result_list = []
+        tc_list = []
+        tc_full_list = []
         splitstr = '_'
         print('>>> Parsing content.json...')
         parse_root_topic(xm_root_topic, '', all_result_list, splitstr)
-        print('>>> Total Testcase: %s' % (len(all_result_list)))
-        final_list = final_li(all_result_list, splitstr)
+        print('>>> Total Routes: %s' % (len(all_result_list)))
+        final_list = final_li(all_result_list, splitstr, tc_list, tc_full_list)
+        # for item in final_list:
+        #     print(item)
+        print('>>> Valid Testcases: %s' % (len(final_list)))
         print('>>> Creating workbook...')
         workbook, worksheet = create_sheet()
         print('>>> Writing template...')
@@ -44,7 +48,7 @@ if __name__ == '__main__':
         print('>>> Writing test case to workbook...')
 
         print('>>> Saving...')
-        save_workbook(workbook, '%s.xls'%(xmfile[:-6]))
+        save_workbook(workbook, '%s.xls' % (xmfile[:-6]))
         print('>>> Done')
         print('---------------------------------------------')
     print('>>> All done')
