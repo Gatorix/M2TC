@@ -18,6 +18,7 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
             print('>>> Dump: %s\n      Reason: Manually Abandoned' % (i))
         else:
             tmpli = []
+
             # 功能路径
             tc_funcpath = i.split(splitstr)[:1]
             # 功能点
@@ -31,13 +32,13 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
                 tc_preconditions = i.split(splitstr)[-3]
             except IndexError as e:
                 print(e)
-
-            tc_preconditions = i.split(splitstr)[-3]
+            tc_preconditions = '前置条件：%s' % (i.split(splitstr)[-3])
             # input
-            tc_input = i.split(splitstr)[-2]
+            tc_input = 'input: %s' % (i.split(splitstr)[-2])
             # output
-            tc_output = i.split(splitstr)[-1]
+            tc_output = 'output: %s' % (i.split(splitstr)[-1])
             # 用例级别
+            # TODO 获取脑图中的用例级别
             tc_level = '0级'
             # 用例责任人
             tc_tester = getpass.getuser()
@@ -53,7 +54,7 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
             tmpli.append(tc_output)
             tmpli.append(tc_level)
             tmpli.append(tc_tester)
-            tmpli.append(tc_level)
+            tmpli.append(tc_version)
 
             tc_full_list.append(tmpli)
 
