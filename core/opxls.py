@@ -60,7 +60,13 @@ def create_sheet():
 
 
 def save_workbook(workbook, savepath):
-    workbook.save(savepath)
+    try:
+        workbook.save(savepath)
+    except PermissionError as e:
+        print('>>> File save failed, close .xls file and retry...')
+        print('      %s'%(e))
+
+    
 
 
 def get_vaild_index(all_list, vaild_list_index):
@@ -139,6 +145,8 @@ def write_cell(li,worksheet):
             vaild_tc_preconditions_index[i]+i, tc_version_li[vaild_tc_preconditions_index[i]+i])
     # 合并行单元格样式
     style_mergerow = xlwt.XFStyle()  # 创建一个样式对象，初始化样式
+    
+    style_mergerow.alignment.wrap = 1
 
     al_mergerow = xlwt.Alignment()
     al_mergerow.horz = 0x02      # 设置水平居中
@@ -151,11 +159,15 @@ def write_cell(li,worksheet):
     # 普通单元格样式
     style_normal_cell = xlwt.XFStyle()
 
+    style_normal_cell.alignment.wrap = 1
+
     font_normal_cell = xlwt.Font()
     font_normal_cell.name = '宋体'
     style_normal_cell.font = font_normal_cell
     # 合并列单元格样式
     style_mergecol = xlwt.XFStyle()
+
+    style_mergecol.alignment.wrap = 1
 
     al_mergecol = xlwt.Alignment()
     al_mergecol.horz = 0x02      # 设置水平居中

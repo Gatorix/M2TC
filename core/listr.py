@@ -9,7 +9,7 @@ def merge_description(li, str=''):
 
 def final_li(all_result_list, splitstr, tc_list, tc_full_list):
     for item in all_result_list:
-        tc_list.append(item[1:])
+        tc_list.append(item[len(splitstr):])
 
     for i in tc_list:
         if len(i.split(splitstr)) < 5:
