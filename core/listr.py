@@ -1,4 +1,5 @@
 import getpass
+import re
 
 
 def merge_description(li, str=''):
@@ -32,7 +33,12 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
                 tc_preconditions = i.split(splitstr)[-3]
             except IndexError as e:
                 print(e)
-            tc_preconditions = '前置条件：%s' % (i.split(splitstr)[-3])
+            if re.match('^[a-zA-Z]$', i.split(splitstr)[-3]):
+                tc_preconditions = '%s前置条件：无' % (i.split(splitstr)[-3])
+            elif i.split(splitstr)[-3] == '无':
+                tc_preconditions = '前置条件：无'
+            else:
+                tc_preconditions = '前置条件：%s' % (i.split(splitstr)[-3])
             # input
             tc_input = 'input: %s' % (i.split(splitstr)[-2])
             # output

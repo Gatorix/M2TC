@@ -1,4 +1,5 @@
 import xlwt
+import re
 
 
 def write_tc_template(sheet, tcname):
@@ -44,13 +45,13 @@ def write_tc_template(sheet, tcname):
     for i in range(len(header_line)):
         sheet.write(1, i, header_line[i], style_headline)
     sheet.write_merge(1, 1, 4, 5, '测试点', style_headline)
-    each_width = [18, 12, 23, 10, 20, 20, 10, 12,
+    each_width = [18, 12, 23, 10, 40, 40, 10, 12,
                   10, 16, 12, 14, 10, 10, 10]
     for i in range(14):
         sheet.col(i).width = 256 * int(round(each_width[i], 0))
 
     sheet.row(0).set_style(xlwt.easyxf('font:height 480'))
-    sheet.row(1).set_style(xlwt.easyxf('font:height 250'))
+    sheet.row(1).set_style(xlwt.easyxf('font:height 420'))
 
 
 def create_sheet():
@@ -64,9 +65,7 @@ def save_workbook(workbook, savepath):
         workbook.save(savepath)
     except PermissionError as e:
         print('>>> File save failed, close .xls file and retry...')
-        print('      %s'%(e))
-
-    
+        print('      %s' % (e))
 
 
 def get_vaild_index(all_list, vaild_list_index):
@@ -94,7 +93,7 @@ def write_merge_cell(worksheet, vaild_index_list, li, col, style, start_r=[], en
                                   li[vaild_index_list[i]], style)
 
 
-def write_cell(li,worksheet):
+def write_cell(li, worksheet):
     tc_funcpath_li = []
     tc_point_li = []
     tc_description_li = []
@@ -145,13 +144,12 @@ def write_cell(li,worksheet):
             vaild_tc_preconditions_index[i]+i, tc_version_li[vaild_tc_preconditions_index[i]+i])
     # 合并行单元格样式
     style_mergerow = xlwt.XFStyle()  # 创建一个样式对象，初始化样式
-    
-    style_mergerow.alignment.wrap = 1
 
     al_mergerow = xlwt.Alignment()
     al_mergerow.horz = 0x02      # 设置水平居中
     al_mergerow.vert = 0x01      # 设置垂直居中
     style_mergerow.alignment = al_mergerow
+    style_mergerow.alignment.wrap = 1
 
     font_mergerow = xlwt.Font()
     font_mergerow.name = '宋体'
@@ -159,6 +157,10 @@ def write_cell(li,worksheet):
     # 普通单元格样式
     style_normal_cell = xlwt.XFStyle()
 
+    al_normal_cell = xlwt.Alignment()
+    # al_mergecol.horz = 0x02      # 设置水平居中
+    al_normal_cell.vert = 0x01      # 设置垂直居中
+    style_normal_cell.alignment = al_normal_cell
     style_normal_cell.alignment.wrap = 1
 
     font_normal_cell = xlwt.Font()
@@ -167,12 +169,11 @@ def write_cell(li,worksheet):
     # 合并列单元格样式
     style_mergecol = xlwt.XFStyle()
 
-    style_mergecol.alignment.wrap = 1
-
     al_mergecol = xlwt.Alignment()
     al_mergecol.horz = 0x02      # 设置水平居中
     al_mergecol.vert = 0x01      # 设置垂直居中
     style_mergecol.alignment = al_mergecol
+    style_mergecol.alignment.wrap = 1
 
     font_mergecol = xlwt.Font()
     font_mergecol.name = '宋体'
@@ -212,6 +213,13 @@ def write_cell(li,worksheet):
 
     # print(vaild_tc_preconditions_index)
     # print(tc_input_li)
+
     for i in range(len(vaild_tc_preconditions_index)):
-        worksheet.write_merge(2+vaild_tc_preconditions_index[i]+i, 2+vaild_tc_preconditions_index[i] +
-                              i, 4, 5, tc_preconditions_li[vaild_tc_preconditions_index[i]], style_mergecol)
+        if re.match('^[a-zA-Z]$', tc_preconditions_li[vaild_tc_preconditions_index[i]][:1]):
+            worksheet.write_merge(2+vaild_tc_preconditions_index[i]+i, 2+vaild_tc_preconditions_index[i] +
+                                  i, 4, 5, tc_preconditions_li[vaild_tc_preconditions_index[i]][1:], style_mergecol)
+        else:
+            worksheet.write_merge(2+vaild_tc_preconditions_index[i]+i, 2+vaild_tc_preconditions_index[i] +
+                                  i, 4, 5, tc_preconditions_li[vaild_tc_preconditions_index[i]], style_mergecol)
+    for i in range(len(tc_preconditions_li)+len(vaild_tc_preconditions_index)):
+        worksheet.row(2+i).set_style(xlwt.easyxf('font:height 400'))
