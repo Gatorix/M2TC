@@ -65,9 +65,13 @@ def parse_root_topic(root_topic, custom_title, result_list, splitstr):
     # 3 提前判断是否存在
     if 'children' in root_topic:
         children = root_topic['children']
-        attached_list = children['attached']
-        for children_dict in attached_list:
-            parse_root_topic(children_dict, custom_title,
-                             result_list, splitstr)
+        if 'attached' in children:
+            attached_list = children['attached']
+            for children_dict in attached_list:
+                parse_root_topic(children_dict, custom_title,
+                                 result_list, splitstr)
+        else:
+            result_list.append(custom_title)
+
     else:
         result_list.append(custom_title)
