@@ -1,5 +1,6 @@
 import xlwt
 import re
+from collections import Counter
 from core.util import exit_with_anykey
 
 
@@ -90,12 +91,12 @@ def write_merge_cell(worksheet, vaild_index_list, li, col, style, start_r=[], en
             worksheet.write_merge(2, len(li)+1, col, col,
                                   li[vaild_index_list[0]], style)
         else:
-            try:
-                worksheet.write_merge(2+start_r[i], 1+end_r[i], col, col,
-                                      li[vaild_index_list[i]], style)
-            except AssertionError as e:
-                print('>>> Abord!\n      Reason: There may be duplicate description')
-                exit_with_anykey()
+            # try:
+            worksheet.write_merge(2+start_r[i], 1+end_r[i], col, col,
+                                  li[vaild_index_list[i]], style)
+            # except AssertionError as e:
+            #     print('>>> Abord!\n      Reason: Write merge cell failed.')
+            #     exit_with_anykey()
 
 
 def write_cell(li, worksheet):
@@ -209,20 +210,37 @@ def write_cell(li, worksheet):
     vaild_tc_description_index = get_vaild_index(
         tc_description_li, vaild_tc_description_index)
 
-    write_merge_cell(worksheet, vaild_tc_funcpath_index,
-                     tc_funcpath_li, 0, style_mergerow)
-    write_merge_cell(worksheet, vaild_tc_point_index,
-                     tc_point_li, 1, style_mergerow)
-    write_merge_cell(worksheet, vaild_tc_description_index,
-                     tc_description_li, 2, style_mergerow)
+    try:
+        write_merge_cell(worksheet, vaild_tc_funcpath_index,
+                         tc_funcpath_li, 0, style_mergerow)
+    except AssertionError:
+        print('>>> Abord!\n      Reason: There may be repetitions in "tc_funcpath".')
+        # check_repetition(tc_funcpath_li, vaild_tc_funcpath_index)
+        exit_with_anykey()
 
-    # print(vaild_tc_preconditions_index)
-    # print(tc_input_li)
+    # TODO 优化提示，显示出有多少个重复元素，分别是什么。根据下标，创建一个新列表，对列表元素进行排查
+    try:
+        write_merge_cell(worksheet, vaild_tc_point_index,
+                         tc_point_li, 1, style_mergerow)
+    except AssertionError:
+        print('>>> Abord!\n      Reason: There may be repetitions in "tc_point".')
+        # check_repetition(tc_point_li, vaild_tc_point_index)
+        # print(vaild_tc_point_index)
+        # print(tc_point_li)
+        exit_with_anykey()
+
+    try:
+        write_merge_cell(worksheet, vaild_tc_description_index,
+                         tc_description_li, 2, style_mergerow)
+    except AssertionError:
+        print('>>> Abord!\n      Reason: There may be repetitions in "tc_description".')
+        # print(check_repetition(tc_description_li, vaild_tc_description_index))
+        exit_with_anykey()
 
     for i in range(len(vaild_tc_preconditions_index)):
 
         if re.match('^[a-zA-Z]{1}$|^[0-9]{1,2}$|^[a-zA-z]{1}[0-9]{1}$|^[0-9]{1}[a-zA-z]{1}$', tc_preconditions_li[vaild_tc_preconditions_index[i]][:2]):
-
+            # TODO 如果使用了重复的标识，增加提示，可能会导致输出excel格式混乱，显示具体哪个标识重复
             worksheet.write_merge(2+vaild_tc_preconditions_index[i]+i, 2+vaild_tc_preconditions_index[i] +
                                   i, 4, 5, tc_preconditions_li[vaild_tc_preconditions_index[i]][2:], style_mergecol)
         else:
@@ -230,3 +248,16 @@ def write_cell(li, worksheet):
                                   i, 4, 5, tc_preconditions_li[vaild_tc_preconditions_index[i]], style_mergecol)
     for i in range(len(tc_preconditions_li)+len(vaild_tc_preconditions_index)):
         worksheet.row(2+i).set_style(xlwt.easyxf('font:height 400'))
+
+
+# def check_repetition(li, index):
+#     reptition_li = []
+
+#     for i, v in enumerate(li):
+#         if i in index:
+#             reptition_li.append(v)
+#     print(reptition_li)
+#     a=['dd','ff','gg','hh','dd']
+#     b = dict(Counter(a))
+#     print([key for key, value in b.items()if value > 1])  # 只展示重复元素
+
