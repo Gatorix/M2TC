@@ -11,7 +11,7 @@ def merge_description(li, str=''):
 def final_li(all_result_list, splitstr, tc_list, tc_full_list):
     for item in all_result_list:
         tc_list.append(item[len(splitstr):])
-
+    none_preconditioncode = []
     for i in tc_list:
         if len(i.split(splitstr)) < 5:
             print('>>> Dump: %s\n      Reason: Route too short' % (i))
@@ -33,12 +33,16 @@ def final_li(all_result_list, splitstr, tc_list, tc_full_list):
                 tc_preconditions = i.split(splitstr)[-3]
             except IndexError as e:
                 print(e)
-            if re.match('^[a-zA-Z]$', i.split(splitstr)[-3]):
-                tc_preconditions = '%s前置条件：无' % (i.split(splitstr)[-3])
-            elif i.split(splitstr)[-3] == '无':
-                tc_preconditions = '前置条件：无'
+            # 匹配单个大写或小写字母、一个或两个数字、一个字母和一个数字组合、一个数字和字母组合
+            if re.match('^[a-zA-Z]{1}$|^[0-9]{1,2}$|^[a-zA-z]{1}[0-9]{1}$|^[0-9]{1}[a-zA-z]{1}$', i.split(splitstr)[-3]):
+                if len(i.split(splitstr)[-3]) < 2:
+                    tc_preconditions = '%s0数据准备：无' % (i.split(splitstr)[-3])
+                else:
+                    tc_preconditions = '%s数据准备：无' % (i.split(splitstr)[-3])
+            # elif i.split(splitstr)[-3] == '无':
+            #     tc_preconditions = '数据准备：无'
             else:
-                tc_preconditions = '前置条件：%s' % (i.split(splitstr)[-3])
+                tc_preconditions = '数据准备：%s' % (i.split(splitstr)[-3])
             # input
             tc_input = 'input: %s' % (i.split(splitstr)[-2])
             # output

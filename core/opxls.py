@@ -1,5 +1,6 @@
 import xlwt
 import re
+from core.util import exit_with_anykey
 
 
 def write_tc_template(sheet, tcname):
@@ -89,8 +90,12 @@ def write_merge_cell(worksheet, vaild_index_list, li, col, style, start_r=[], en
             worksheet.write_merge(2, len(li)+1, col, col,
                                   li[vaild_index_list[0]], style)
         else:
-            worksheet.write_merge(2+start_r[i], 1+end_r[i], col, col,
-                                  li[vaild_index_list[i]], style)
+            try:
+                worksheet.write_merge(2+start_r[i], 1+end_r[i], col, col,
+                                      li[vaild_index_list[i]], style)
+            except AssertionError as e:
+                print('>>> Abord!\n      Reason: There may be duplicate description')
+                exit_with_anykey()
 
 
 def write_cell(li, worksheet):
@@ -215,9 +220,11 @@ def write_cell(li, worksheet):
     # print(tc_input_li)
 
     for i in range(len(vaild_tc_preconditions_index)):
-        if re.match('^[a-zA-Z]$', tc_preconditions_li[vaild_tc_preconditions_index[i]][:1]):
+
+        if re.match('^[a-zA-Z]{1}$|^[0-9]{1,2}$|^[a-zA-z]{1}[0-9]{1}$|^[0-9]{1}[a-zA-z]{1}$', tc_preconditions_li[vaild_tc_preconditions_index[i]][:2]):
+
             worksheet.write_merge(2+vaild_tc_preconditions_index[i]+i, 2+vaild_tc_preconditions_index[i] +
-                                  i, 4, 5, tc_preconditions_li[vaild_tc_preconditions_index[i]][1:], style_mergecol)
+                                  i, 4, 5, tc_preconditions_li[vaild_tc_preconditions_index[i]][2:], style_mergecol)
         else:
             worksheet.write_merge(2+vaild_tc_preconditions_index[i]+i, 2+vaild_tc_preconditions_index[i] +
                                   i, 4, 5, tc_preconditions_li[vaild_tc_preconditions_index[i]], style_mergecol)
